@@ -140,4 +140,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         database.execSQL("delete from " + TABLE_NAME + " where " + COLUMN_ID + " = '" + contact.getID() + "'");
         database.close();
     }
+
+    public ArrayList<String> getAllTableName()
+    {
+        database = this.getReadableDatabase();
+        ArrayList<String> allTableNames=new ArrayList<String>();
+        Cursor cursor=database.rawQuery("SELECT name FROM sqlite_master WHERE type='table'",null);
+        if(cursor.getCount()>0)
+        {
+            for(int i=0;i<cursor.getCount();i++)
+            {
+                cursor.moveToNext();
+                allTableNames.add(cursor.getString(cursor.getColumnIndex("name")));
+            }
+        }
+        return allTableNames;
+    }
+
 }
