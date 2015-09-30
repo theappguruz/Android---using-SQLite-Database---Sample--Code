@@ -154,6 +154,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 allTableNames.add(cursor.getString(cursor.getColumnIndex("name")));
             }
         }
+        cursor.close();
+        database.close();
         return allTableNames;
     }
 
